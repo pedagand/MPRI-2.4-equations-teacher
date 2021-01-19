@@ -1,6 +1,6 @@
 DST  := ../lecture-MPRI-2.4-equations-public
 ROOT := dune-project .gitignore .ocamlformat runtest.sh CONTRIBUTING.md
-SRC  := $(shell git ls-files lib/ exercises/ examples/)
+SRC  := $(shell git ls-files lib/ exercises/)
 
 .PHONY: export
 export:
