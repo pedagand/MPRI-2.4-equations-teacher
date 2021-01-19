@@ -1,3 +1,9 @@
+(* sujet
+(* Once you are done writing the code, remove this directive,
+   whose purpose is to disable several warnings. *)
+[@@@warning "-27-32-33-34-37-39"]
+  /sujet *)
+
 open Functor
 
 module Make (F : Functor) = struct
@@ -37,7 +43,7 @@ module Make (F : Functor) = struct
     }
 
   (* sujet
-     let rec run f alg m = failwith "NYI"
+     let rec run alg m = failwith "NYI"
         /sujet *)
   (* corrige *)
   let rec run alg m =

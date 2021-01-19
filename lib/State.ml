@@ -1,7 +1,7 @@
 (* sujet
 (* Once you are done writing the code, remove this directive,
    whose purpose is to disable several warnings. *)
-[@@@warning "-27-32-33-37-39"]
+[@@@warning "-27-32-33-34-37-39"]
   /sujet *)
 
 module Make (S : sig
@@ -25,7 +25,7 @@ struct
   module Signature = Functor.Make (Variant)
   open Signature
 
-  (* corrige *)
+  (* /corrige *)
 
   module State = Free.Make (Signature)
   include State
@@ -35,7 +35,7 @@ struct
      let set s = failwith "NYI"
 
      let run m = failwith "NYI"
-        /sujet *)
+     /sujet *)
 
   (* corrige *)
   let get () = op (Constr (Get, (), fun x -> x))
