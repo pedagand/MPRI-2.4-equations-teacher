@@ -1,5 +1,5 @@
 DST  := ../lecture-MPRI-2.4-equations-public
-ROOT := dune-project .gitignore .ocamlformat runtest.sh CONTRIBUTING.md data/README.md
+ROOT := dune-project .gitignore .ocamlformat runtest.sh CONTRIBUTING.md
 SRC  := $(shell git ls-files lib/ exercises/)
 
 .PHONY: export
@@ -11,6 +11,7 @@ export:
 	@ mkdir $(DST) $(DST)/lib $(DST)/exercises
 # Copy the files that must reside at the root.
 	@ cp $(ROOT) $(DST)
+	@ cat README.md data/README.md > $(DST)/README.md
 # Copy the source files.
 	@ for f in $(SRC) ; do \
 	  sed -f sanitize.sed $$f > $(DST)/$$f ; \
