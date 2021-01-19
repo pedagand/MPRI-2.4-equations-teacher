@@ -46,7 +46,6 @@ module State = struct
 end
 
 open Transaction
-
 module M = Update.Make (Transaction) (State)
 open M
 

@@ -14,14 +14,16 @@ end
 (* corrige *)
 module Variant = struct
   type void = |
+
   type ('i, 'o) t = Err : (exn, void) t
 end
 
-module Signature = Functor.Make(Variant)
+module Signature = Functor.Make (Variant)
 open Signature
+
 (* /corrige *)
 
-module Error = Free.Make(Signature)
+module Error = Free.Make (Signature)
 include Error
 
 (* sujet
@@ -31,11 +33,12 @@ let run m = failwith "NYI"
    /sujet *)
 
 (* corrige *)
-let err e = op (Constr (Err, e, function | _ -> .))
+let err e = op (Constr (Err, e, function _ -> .))
 
 let run m =
-  let alg = { return = (fun x -> x);
-              op = function
-                   | Constr (Err, e, _) -> raise e } in
+  let alg =
+    { return = (fun x -> x); op = (function Constr (Err, e, _) -> raise e) }
+  in
   Error.run alg m
+
 (* /corrige *)

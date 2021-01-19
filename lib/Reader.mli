@@ -8,17 +8,17 @@ end) : sig
   val get : unit -> Env.t t
 
   (* Subject to the following equations:
-  [R1] let* s = get () in m
-           ~
-       m
+     [R1] let* s = get () in m
+              ~
+          m
 
-  [R2] let* s1 = get () in
-       let* s2 = get () in
-       k s1 s2
-           ~
-       let* s = get () in
-       k s s
-   *)
+     [R2] let* s1 = get () in
+          let* s2 = get () in
+          k s1 s2
+              ~
+          let* s = get () in
+          k s s
+  *)
 
   (* Runner *)
 

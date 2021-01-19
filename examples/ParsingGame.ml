@@ -41,6 +41,7 @@ let play_game s =
   in
   help 0
 
+
 let result s = run (play_game s) (false, 0)
 
 let result2 s1 s2 =

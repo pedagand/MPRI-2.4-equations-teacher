@@ -39,6 +39,7 @@ let rec sem e =
       let* b = take_bool vb in
       if b then sem e1 else sem e2
 
+
 (** * Tests *)
 
 let%test _ = run (sem (Val (IsNat 42))) = IsNat 42

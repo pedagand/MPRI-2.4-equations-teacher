@@ -1,7 +1,6 @@
 module Make (S : sig
   type t
 end) : sig
-
   include Monad.FullMonad
 
   (* Operations *)
