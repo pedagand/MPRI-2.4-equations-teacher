@@ -20,4 +20,6 @@ module Make (P : Pattern) = struct
 
   let map f xs =
     match xs with Constr (op, args, k) -> Constr (op, args, fun o -> f (k o))
+
+  let constr p args = Constr(p, args, fun x -> x)
 end

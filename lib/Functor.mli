@@ -15,10 +15,10 @@ module type Functor = sig
   val map : ('a -> 'b) -> 'a t -> 'b t
 end
 
-module Make (P : sig
-  type ('i, 'o) t
-end) : sig
+module Make (P : Pattern) : sig
   type 'a t = Constr : ('i, 'o) P.t * 'i * ('o -> 'a) -> 'a t
 
   val map : ('a -> 'b) -> 'a t -> 'b t
+
+  val constr : ('i, 'o) P.t -> 'i -> 'o t
 end

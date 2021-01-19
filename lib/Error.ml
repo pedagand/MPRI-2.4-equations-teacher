@@ -33,7 +33,9 @@ let run m = failwith "NYI"
    /sujet *)
 
 (* corrige *)
-let err e = op (Constr (Err, e, function _ -> .))
+let err e = let* void = op (constr Err e) in
+            match void with
+            | _ -> .
 
 let run m =
   let alg =

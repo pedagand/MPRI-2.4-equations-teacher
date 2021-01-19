@@ -38,9 +38,9 @@ struct
      /sujet *)
 
   (* corrige *)
-  let get () = op (Constr (Get, (), fun x -> x))
+  let get () = op (constr Get ())
 
-  let set s = op (Constr (Set, s, fun x -> x))
+  let set s = op (constr Set s)
 
   let run m =
     let alg =
