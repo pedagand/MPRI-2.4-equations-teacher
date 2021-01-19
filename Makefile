@@ -1,6 +1,6 @@
 DST  := ../lecture-MPRI-2.4-equations-public
 ROOT := dune-project .gitignore .ocamlformat runtest.sh CONTRIBUTING.md
-SRC  := $(shell git ls-files lib/ exercises/)
+SRC  := $(shell git ls-files lib/ exercises/ examples/)
 
 .PHONY: export
 export:
@@ -17,6 +17,6 @@ export:
 	  sed -f sanitize.sed $$f > $(DST)/$$f ; \
 	done
 # Compile the code that is given to the students.
-	@ cd $(DST); dune build; dune build @fmt --auto-promote
+	@ cd $(DST); dune build; # dune build @fmt --auto-promote
 # Show what we have done.
 	ls $(DST) $(DST)/lib $(DST)/exercises
