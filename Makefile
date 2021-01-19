@@ -1,4 +1,4 @@
-DST  := ../lecture-MPRI-2.4-monads-public
+DST  := ../lecture-MPRI-2.4-equations-public
 ROOT := dune-project .gitignore .ocamlformat runtest.sh CONTRIBUTING.md data/README.md
 SRC  := $(shell git ls-files lib/ exercises/)
 
