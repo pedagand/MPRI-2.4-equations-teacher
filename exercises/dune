@@ -1,5 +1,5 @@
 (library
- (name exercices)
+ (name exercises)
  (libraries monads)
  (inline_tests)
  (preprocess
