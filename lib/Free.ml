@@ -33,7 +33,7 @@ module Make (F : Functor) = struct
 
   module M = Monad.Expand (Base)
   include M
-  open Base
+  include Base
 
   let op xs = Op (F.map return xs)
 

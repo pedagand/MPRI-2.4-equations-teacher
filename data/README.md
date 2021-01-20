@@ -5,8 +5,8 @@
 Your host suggests that you complete the exercises in the following
 order:
   1. `lib/Free.ml`
-  1. `lib/Error.ml`
   1. `lib/State.ml`
+  1. Need more? `lib/Error.ml`
   
 Then take a break, drink a coffee/tea and you may embark on:
   

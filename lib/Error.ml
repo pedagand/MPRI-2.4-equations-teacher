@@ -23,8 +23,18 @@ open Signature
 
 (* /corrige *)
 
-module Error = Free.Make (Signature)
-include Error
+module FreeError = Free.Make (Signature)
+include FreeError
+
+(* Define [Signature] so that ['a FreeError.t] is isomorphic to the
+   following type:
+
+<<<
+     type 'a t = 
+       | Return of 'a 
+       | Err of exn * (void -> 'a t)
+>>>
+*)
 
 (* sujet
 let err e = failwith "NYI"
@@ -42,6 +52,6 @@ let run m =
   let alg =
     { return = (fun x -> x); op = (function Constr (Err, e, _) -> raise e) }
   in
-  Error.run alg m
+  FreeError.run alg m
 
 (* /corrige *)

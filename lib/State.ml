@@ -53,18 +53,40 @@ struct
 
   let set s = op (constr Set s)
 
-  let run m =
-    let alg =
-      { return = (fun a _ -> a)
-      ; op =
-          (function
-          | Constr (Get, (), k) ->
-              fun (s : S.t) -> k s s
-          | Constr (Set, (s : S.t), k) ->
-              fun _ -> k () s)
-      }
+  type exists = | Ex : 'a Signature.t -> exists
+
+  exception Done
+  module type Sigma = sig
+    type fst 
+    val snd : S.t -> fst
+  end
+  exception Continue of (module Sigma)
+
+  let run (type a) (m: a t) s0 =
+    let rec trampoline (m: a t)(s: S.t) =
+      try
+        match m with
+        | Return a -> a
+        | Op (Constr (Get, (), k)) -> 
+           let module M = struct
+               type fst = a
+               let snd = (fun s -> trampoline (k s) s)
+             end
+           in 
+           raise (Continue (module M))
+        (* fun (s : S.t) -> k s s *)
+        | Op (Constr (Set, (s : S.t), k)) -> 
+           let module M = struct
+               type fst = a
+               let snd = (fun _ -> trampoline (k ()) s)
+             end
+           in
+           raise (Continue (module M))
+      with
+      | Continue (module M) -> M.snd s
+         
     in
-    FreeState.run alg m
+    trampoline m s0
 
   (* /corrige *)
 end
