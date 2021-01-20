@@ -31,15 +31,15 @@ struct
   include FreeState
 
   (* Define [Signature] so that ['a FreeState.t] is isomorphic to the
-     following type:
+          following type:
 
-<<<
-     type 'a t = 
-       | Return of 'a 
-       | Get of unit * (S.t -> 'a t)
-       | Set of S.t * (unit -> 'a t)
->>>
-   *)
+     <<<
+          type 'a t =
+            | Return of 'a
+            | Get of unit * (S.t -> 'a t)
+            | Set of S.t * (unit -> 'a t)
+     >>>
+  *)
 
   (* sujet
      let get () = failwith "NYI"
