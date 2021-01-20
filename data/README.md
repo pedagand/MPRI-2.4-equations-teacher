@@ -7,6 +7,9 @@ order:
   1. `lib/Free.ml`
   1. `lib/Error.ml`
   1. `lib/State.ml`
+  
+Then take a break, drink a coffee/tea and you may embark on:
+  
   1. `lib/Reader.ml`
   1. `lib/Writer.ml`
   1. Not sure about the previous one?  `exercises/Logger.ml`
