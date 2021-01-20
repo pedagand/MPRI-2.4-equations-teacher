@@ -27,8 +27,19 @@ struct
 
   (* /corrige *)
 
-  module State = Free.Make (Signature)
-  include State
+  module FreeState = Free.Make (Signature)
+  include FreeState
+
+  (* Define [Signature] so that ['a FreeState.t] is isomorphic to the
+     following type:
+
+<<<
+     type 'a t = 
+       | Return of 'a 
+       | Get of unit * (S.t -> 'a t)
+       | Set of S.t * (unit -> 'a t)
+>>>
+   *)
 
   (* sujet
      let get () = failwith "NYI"
@@ -53,7 +64,7 @@ struct
               fun _ -> k () s)
       }
     in
-    State.run alg m
+    FreeState.run alg m
 
   (* /corrige *)
 end
