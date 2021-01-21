@@ -8,9 +8,9 @@ open Functor
 
 module Make (F : Functor) = struct
   module Base = struct
-    type 'a t =
+    type 'a m =
       | Return of 'a
-      | Op of 'a t F.t
+      | Op of 'a m F.f
 
     (* sujet
        let return a = failwith "NYI"
@@ -39,7 +39,7 @@ module Make (F : Functor) = struct
 
   type ('a, 'b) algebra =
     { return : 'a -> 'b
-    ; op : 'b F.t -> 'b
+    ; op : 'b F.f -> 'b
     }
 
   (* sujet

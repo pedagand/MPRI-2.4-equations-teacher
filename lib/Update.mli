@@ -1,13 +1,13 @@
 open Monoid
 
-module Make (P : Monoid) (S : MonoidAction with type m = P.t) : sig
+module Make (P : Monoid) (S : MonoidAction with type monoid = P.monoid) : sig
   include Monad.FullMonad
 
   (* Operations *)
 
-  val get : unit -> S.t t
+  val get : unit -> S.action m
 
-  val set : P.t -> unit t
+  val set : P.monoid -> unit m
 
   (* Subject to the following equations:
      [W1] let* () = set Log.empty in
@@ -44,5 +44,5 @@ module Make (P : Monoid) (S : MonoidAction with type m = P.t) : sig
 
   (* Runner *)
 
-  val run : 'a t -> S.t -> P.t * 'a
+  val run : 'a m -> S.action -> P.monoid * 'a
 end

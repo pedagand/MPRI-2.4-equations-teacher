@@ -1,15 +1,15 @@
 module type Monoid = sig
-  type t
+  type monoid
 
-  val empty : t
+  val empty : monoid
 
-  val ( <+> ) : t -> t -> t
+  val ( <+> ) : monoid -> monoid -> monoid
 end
 
 module type MonoidAction = sig
-  type m
+  type monoid
 
-  type t
+  type action
 
-  val act : t -> m -> t
+  val act : action -> monoid -> action
 end

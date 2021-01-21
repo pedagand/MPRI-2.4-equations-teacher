@@ -6,7 +6,7 @@
 
 (* sujet
 module Signature = struct
-  type 'a t = | (* NYI *)
+  type 'a f = | (* NYI *)
   let map f s = failwith "NYI"
 end
  /sujet *)
@@ -15,7 +15,7 @@ end
 module Variant = struct
   type void = |
 
-  type ('i, 'o) t = Err : (exn, void) t
+  type ('i, 'o) p = Err : (exn, void) p
 end
 
 module Signature = Functor.Make (Variant)

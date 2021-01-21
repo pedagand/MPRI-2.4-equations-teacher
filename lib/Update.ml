@@ -6,25 +6,25 @@ open Monoid
 [@@@warning "-27-32-33-37-39"]
   /sujet *)
 
-module Make (P : Monoid) (S : MonoidAction with type m = P.t) = struct
+module Make (P : Monoid) (S : MonoidAction with type monoid = P.monoid) = struct
   module Reader = Reader.Make (struct
-    type t = S.t
+    type t = S.action
   end)
 
   module Writer = Writer.Make (P)
 
   (* sujet
-     let lift ((l1, k): 'a Reader.t Writer.t): 'a Writer.t Reader.t = failwith "NYI"
+     let lift ((l1, k): 'a Reader.m Writer.m): 'a Writer.m Reader.m = failwith "NYI"
         /sujet *)
   (* corrige *)
-  let lift ((l1, k) : 'a Reader.t Writer.t) : 'a Writer.t Reader.t =
+  let lift ((l1, k) : 'a Reader.m Writer.m) : 'a Writer.m Reader.m =
    fun s -> (l1, k (S.act s l1))
 
 
   (* /corrige *)
 
   module Base = struct
-    type 'a t = 'a Writer.t Reader.t
+    type 'a m = 'a Writer.m Reader.m
 
     (* sujet
        let return a = failwith "NYI"
@@ -35,7 +35,7 @@ module Make (P : Monoid) (S : MonoidAction with type m = P.t) = struct
     (* corrige *)
     let return a = Reader.return (Writer.return a)
 
-    let bind (rwm : 'a t) (f : 'a -> 'b t) =
+    let bind rwm f =
       Reader.bind rwm (fun wm ->
           Reader.bind
             (lift (Writer.bind wm (fun v -> Writer.return (f v))))

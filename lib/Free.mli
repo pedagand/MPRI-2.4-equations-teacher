@@ -1,29 +1,27 @@
 open Functor
 
 module Make (F : Functor) : sig
-  type 'a t =
+  type 'a m =
     | Return of 'a
-    | Op of 'a t F.t
+    | Op of 'a m F.f
 
-  val return : 'a -> 'a t
+  val return : 'a -> 'a m
 
-  val bind : 'a t -> ('a -> 'b t) -> 'b t
+  val bind : 'a m -> ('a -> 'b m) -> 'b m
 
-  (* Alternative namings: *)
-  val ( >>= ) : 'a t -> ('a -> 'b t) -> 'b t (* à la Haskell *)
+  val ( >>= ) : 'a m -> ('a -> 'b m) -> 'b m
 
-  val ( let* ) : 'a t -> ('a -> 'b t) -> 'b t (* à la ML *)
+  val ( let* ) : 'a m -> ('a -> 'b m) -> 'b m
 
-  (* Categorical presentation: *)
-  val join : 'a t t -> 'a t
+  val join : 'a m m -> 'a m
 
 
-  val op : 'a F.t -> 'a t
+  val op : 'a F.f -> 'a m
 
   type ('a, 'b) algebra =
     { return : 'a -> 'b
-    ; op : 'b F.t -> 'b
+    ; op : 'b F.f -> 'b
     }
 
-  val run : ('a, 'b) algebra -> 'a t -> 'b
+  val run : ('a, 'b) algebra -> 'a m -> 'b
 end

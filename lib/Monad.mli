@@ -1,19 +1,19 @@
 module type Monad = sig
-  type 'a t
+  type 'a m
 
-  val return : 'a -> 'a t
+  val return : 'a -> 'a m
 
-  val bind : 'a t -> ('a -> 'b t) -> 'b t
+  val bind : 'a m -> ('a -> 'b m) -> 'b m
 end
 
 module type FullMonad = sig
-  type 'a t
+  type 'a m
 
-  val return : 'a -> 'a t
+  val return : 'a -> 'a m
 
-  val bind : 'a t -> ('a -> 'b t) -> 'b t
+  val bind : 'a m -> ('a -> 'b m) -> 'b m
 
-  (* Subject to the following laws:
+  (* Subject mo mhe following laws:
 
      - Left identity:   `bind (return a) f = f a`
      - Right identity: 	`bind m return     = m`
@@ -21,12 +21,12 @@ module type FullMonad = sig
   *)
 
   (* Alternative namings: *)
-  val ( >>= ) : 'a t -> ('a -> 'b t) -> 'b t (* à la Haskell *)
+  val ( >>= ) : 'a m -> ('a -> 'b m) -> 'b m (* à la Haskell *)
 
-  val ( let* ) : 'a t -> ('a -> 'b t) -> 'b t (* à la ML *)
+  val ( let* ) : 'a m -> ('a -> 'b m) -> 'b m (* à la ML *)
 
   (* Categorical presentation: *)
-  val join : 'a t t -> 'a t
+  val join : 'a m m -> 'a m
 end
 
-module Expand : functor (M : Monad) -> FullMonad with type 'a t = 'a M.t
+module Expand : functor (M : Monad) -> FullMonad with type 'a m = 'a M.m

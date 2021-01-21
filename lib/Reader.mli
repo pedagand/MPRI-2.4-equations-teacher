@@ -1,11 +1,11 @@
 module Make (Env : sig
   type t
 end) : sig
-  include Monad.FullMonad with type 'a t = Env.t -> 'a
+  include Monad.FullMonad with type 'a m = Env.t -> 'a
 
   (* Operations *)
 
-  val get : unit -> Env.t t
+  val get : unit -> Env.t m
 
   (* Subject to the following equations:
      [R1] let* s = get () in m
@@ -22,5 +22,5 @@ end) : sig
 
   (* Runner *)
 
-  val run : 'a t -> Env.t -> 'a
+  val run : 'a m -> Env.t -> 'a
 end

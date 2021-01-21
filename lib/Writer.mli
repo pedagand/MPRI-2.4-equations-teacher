@@ -1,15 +1,9 @@
-module Make (Log : sig
-  type t
-
-  val empty : t
-
-  val ( <+> ) : t -> t -> t
-end) : sig
-  include Monad.FullMonad with type 'a t = Log.t * 'a
+module Make (Log : Monoid.Monoid) : sig
+  include Monad.FullMonad with type 'a m = Log.monoid * 'a
 
   (* Operations *)
 
-  val set : Log.t -> unit t
+  val set : Log.monoid -> unit m
 
   (* Subject to the following equations:
      [W0] let* () = set Log.empty in
@@ -27,5 +21,5 @@ end) : sig
 
   (* Runner *)
 
-  val run : 'a t -> Log.t * 'a
+  val run : 'a m -> Log.monoid * 'a
 end

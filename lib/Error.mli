@@ -2,8 +2,8 @@ include Monad.FullMonad
 
 (* Operations *)
 
-val err : exn -> 'a t
+val err : exn -> 'a m
 
 (* Runner *)
 
-val run : 'a t -> 'a
+val run : 'a m -> 'a

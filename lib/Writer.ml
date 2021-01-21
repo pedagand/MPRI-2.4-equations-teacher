@@ -4,18 +4,12 @@
 [@@@warning "-27-32-33-37-39"]
   /sujet *)
 
-module Make (Log : sig
-  type t
-
-  val empty : t
-
-  val ( <+> ) : t -> t -> t
-end) =
+module Make (Log : Monoid.Monoid) =
 struct
   open Log
 
   module Base = struct
-    type 'a t = Log.t * 'a
+    type 'a m = Log.monoid * 'a
 
     (* sujet
        let return a = failwith "NYI"

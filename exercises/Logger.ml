@@ -10,7 +10,7 @@ open Monads
 
 (* corrige *)
 module M = Writer.Make (struct
-  type t = string list
+  type monoid = string list
 
   let empty = []
 
@@ -107,7 +107,7 @@ let%test _ =
 (* corrige *)
 module Solution2 = struct
   module M = Writer.Make (struct
-    type t = string list -> string list
+    type monoid = string list -> string list
 
     let empty x = x
 

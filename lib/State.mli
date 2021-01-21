@@ -5,11 +5,11 @@ end) : sig
 
   (* Operations *)
 
-  val get : unit -> S.t t
+  val get : unit -> S.t m
 
-  val set : S.t -> unit t
+  val set : S.t -> unit m
 
   (* Runner *)
 
-  val run : 'a t -> S.t -> 'a
+  val run : 'a m -> S.t -> 'a
 end

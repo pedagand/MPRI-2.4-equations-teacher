@@ -3,10 +3,10 @@ open Monads
 (* Taken from https://chrispenner.ca/posts/update-monad *)
 
 module Transaction = struct
-  type t =
-    | Deposit of int * t
-    | Withdraw of int * t
-    | ApplyInterest of t
+  type monoid =
+    | Deposit of int * monoid
+    | Withdraw of int * monoid
+    | ApplyInterest of monoid
     | EndOfTransaction
 
   let empty = EndOfTransaction
@@ -27,9 +27,9 @@ end
 module State = struct
   open Transaction
 
-  type m = Transaction.t
+  type monoid = Transaction.monoid
 
-  type t = int
+  type action = int
 
   (* TODO: should use an integral representation instead: manipulate 'balance * 100' *)
   let compute_interest balance = int_of_float (float_of_int balance *. 1.1)

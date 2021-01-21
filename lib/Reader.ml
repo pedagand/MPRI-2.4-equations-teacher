@@ -9,7 +9,7 @@ module Make (Env : sig
 end) =
 struct
   module Base = struct
-    type 'a t = Env.t -> 'a
+    type 'a m = Env.t -> 'a
 
     (* sujet
        let return a = failwith "NYI"
